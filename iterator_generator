@@ -1,0 +1,65 @@
+# generator
+def fib(limit):
+     
+    # Initialize first two Fibonacci Numbers
+    a, b = 0, 1
+ 
+    # One by one yield next Fibonacci Number
+    while a < limit:
+        yield a
+        print("finding next a,b")
+        a, b = b, a + b
+
+    print("nothing more to do")
+
+it = fib(10)
+print(next(it))
+print(next(it))
+print(next(it))
+print(next(it))
+print(next(it))
+
+
+# iterator
+class EvenNumbers:
+    last = 0
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        self.last += 2
+        if self.last > 8:
+            raise StopIteration
+        return self.last
+    
+even_numbers = EvenNumbers()
+
+for num in even_numbers:
+    print(num)
+
+
+# iterator
+class OrderBook:
+
+    def __init__(self):
+        self.orders = [1,2,3,4,5,6,7]
+
+    def __iter__(self):
+        print("creating iterator")
+        self.cur = 0
+        return self
+
+    def __next__(self):
+        try:
+            val = self.orders[self.cur]
+        except:
+            raise StopIteration
+        self.cur += 1
+        return val
+        
+        
+
+ob = OrderBook()
+
+for order in ob:
+    print(order)
